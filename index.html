@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <style>
+        .red
+        {
+            background: #a30;
+        }
+        .error
+        {
+            color: #a10;
+        }
+        input.error
+        {
+            border: 1px solid #c01128;
+
+        }
+        .wrapper
+        {
+          width: 200px;
+          margin: 30px auto;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="SignUpController">
+<div class="wrapper">
+<h2>注册</h2>
+  <form name="signupform" ng-submit ="submitForm()">
+  <div class="form-group">
+    <label>用户名：</label>
+    <input name="username" 
+          type="text" 
+          class="form-control" 
+          ng-model="userdata.username"
+          ng-minlength = "4"
+          ng-maxlength = "32"
+          required
+    >
+    <p class="error" ng-if ="(submitForm.username.$error.minlength ||
+      submitForm.username.$error.maxlength) &&  submitForm.username.$tu"></p>
+  </div>
+
+  <div class="form-group">
+    <label>密码：</label>
+    <input name="password" type="password" class="form-control" ng-model="userdata.password">
+    <p class="error" ng-if="(submitForm.password.$error.minlength || submitForm.password.$error.maxlength) && submitForm.password.$tu"></p>
+  </div>
+
+  <div class="form-group">
+    <label>确认密码：</label>
+    <input name="password2" type="password" class="form-control" ng-model="userdata.password2">
+    <p class="error"></p>
+  </div> 
+
+  <div class="form-group">
+    <label>邮箱</label>
+    <input type="email" name="email" class="form-control" ng-model="userdata.email" /> 
+  </div>
+
+  <div class="form-group">
+    <label>数字</label>
+    <input type="number" name="age" class="form-control" ng-model="userdata.age" required/> 
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary">注册</button>
+  </div> 
+
+</form>
+</div>
+
+<script src="lib/angular.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

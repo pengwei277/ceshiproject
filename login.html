@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/foundation.min.css"/>
+    <title>scope作用域</title>
+</head>
+<body style="padding:20px;" ng-app="app">
+<div ng-controller="MyCtrl">
+    <!-- 使用$scope中的方法 -->
+    <input type="text" ng-model="msg">
+    <h3>{{myReverse()}}</h3>
+
+    <input type="text" ng-model="user.name">
+    <input type="text" ng-model="user.pwd">
+    <div class="button" ng-click="login()">登录</div>
+    <div class="alert-box" ng-show="errormsg.length>0">{{errormsg}}</div>
+</div>
+
+</body>
+<script src="js/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('app', [])
+            .controller('MyCtrl', function ($scope) {
+                $scope.msg = "";
+                $scope.user = {name:'', pwd: ''};//name和pwd两个属性；$scope.user.name和$scope.user.pwd
+                $scope.errormsg = "";
+                $scope.myReverse = function () { //自定义反转函数
+                    return $scope.msg.split("").reverse().join("");
+                }
+                $scope.login = function() {
+                    if($scope.user.name === 'admin' && $scope.user.pwd === '12345') {
+                        console.log($scope.user);
+                        alert("登录成功");
+                    } else {
+                        $scope.errormsg = "用户名或密码输入错误!";
+                    }
+                }
+            })
+</script>
+</html>
